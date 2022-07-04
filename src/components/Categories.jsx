@@ -6,7 +6,7 @@ const Categories = () => {
       <div className="categories__label">
         <b>Categories </b>
         <span>
-          all
+          all{" "}
           <svg
             width="10"
             height="6"

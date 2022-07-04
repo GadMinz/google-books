@@ -5,7 +5,7 @@ const Search = () => {
   return (
     <div className="search">
       <input type="text" placeholder="Search" />
-      <img width={32} src={search} alt="search" />
+      <img width={28} src={search} alt="search" />
     </div>
   );
 };

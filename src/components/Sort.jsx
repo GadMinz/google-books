@@ -6,7 +6,7 @@ const Sort = () => {
       <div className="sort__label">
         <b>Sorting by </b>
         <span>
-          relevance
+          relevance{" "}
           <svg
             width="10"
             height="6"
