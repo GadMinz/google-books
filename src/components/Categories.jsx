@@ -1,11 +1,21 @@
 import React from "react";
 
+const categories = [
+  "all",
+  "art",
+  "biography",
+  "computers",
+  "history",
+  "medical",
+  "poetry",
+];
 const Categories = () => {
+  const [open, setOpen] = React.useState(false);
   return (
     <div className="categories">
       <div className="categories__label">
         <b>Categories </b>
-        <span>
+        <span onClick={() => setOpen(!open)}>
           all{" "}
           <svg
             width="10"
@@ -20,6 +30,15 @@ const Categories = () => {
             />
           </svg>
         </span>
+        {open && (
+          <div className="popup">
+            <ul>
+              {categories.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

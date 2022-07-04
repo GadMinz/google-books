@@ -1,7 +1,9 @@
 .categories {
+  position: relative;
   &__label {
     span {
       cursor: pointer;
+      font-style: italic;
     }
   }
 }
