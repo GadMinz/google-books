@@ -4,9 +4,18 @@ const sortList = ["relevance", "newest"];
 
 const Sort = () => {
   const [open, setOpen] = React.useState(false);
-
+  const sortRef = React.useRef();
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.path.includes(sortRef.current)) {
+        setOpen(false);
+      }
+    };
+    document.body.addEventListener("click", handleClickOutside);
+    return () => document.body.removeEventListener("click", handleClickOutside);
+  }, []);
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <b>Sorting by </b>
         <span onClick={() => setOpen(!open)}>
