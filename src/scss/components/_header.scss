@@ -9,6 +9,9 @@
     margin-bottom: 20px;
     h1 {
       color: #ffffff;
+      @media (max-width: 420px) {
+        font-size: 36px;
+      }
     }
   }
 }

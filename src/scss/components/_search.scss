@@ -1,5 +1,5 @@
 .search {
-  min-width: 350px;
+  min-width: 290px;
   width: 30%;
   display: flex;
   align-items: center;
@@ -11,7 +11,7 @@
     width: 90%;
     border-radius: 5px;
     font-size: 16px;
-    min-width: 300px;
+    min-width: 260px;
     font-weight: 600;
     height: 32px;
   }
@@ -21,8 +21,10 @@
   }
 
   &__properties {
+    min-width: 290px;
+    width: 30%;
     display: flex;
-    gap: 50px;
+    justify-content: space-between;
     color: #ffffff;
   }
 }
