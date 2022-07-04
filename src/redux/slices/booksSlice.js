@@ -5,17 +5,17 @@ export const fetchBooks = createAsyncThunk(
   "book/fetchBookStatus",
   async (params) => {
     const { searchValue } = params;
-    console.log(searchValue);
-    const { items } = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchValue}&key=${apiKey}`
+    const { data } = await axios.get(
+      `https://www.googleapis.com/books/v1/volumes?q=${searchValue}&maxResults=30&key=${apiKey}`
     );
-    return items;
+    return data;
   }
 );
 
 const initialState = {
   items: [],
-  status: "loading", //loading, success, error
+  totalItems: 0,
+  status: "success", //loading, success, error
 };
 
 const bookSlice = createSlice({
@@ -26,14 +26,17 @@ const bookSlice = createSlice({
     [fetchBooks.pending]: (state) => {
       state.status = "loading";
       state.items = [];
+      state.totalItems = 0;
     },
     [fetchBooks.fulfilled]: (state, action) => {
-      state.items = action.payload;
+      state.items = action.payload.items;
+      state.totalItems = action.payload.totalItems;
       state.status = "success";
     },
     [fetchBooks.rejected]: (state) => {
       state.status = "error";
       state.items = [];
+      state.totalItems = 0;
     },
   },
 });

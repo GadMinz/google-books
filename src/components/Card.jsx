@@ -1,20 +1,22 @@
 import React from "react";
 import book from "../assets/img/error-book.png";
 
-const Card = () => {
+const Card = ({ title, categories, authors, imageLinks }) => {
+  const bookImg = imageLinks
+    ? imageLinks.thumbnail || imageLinks.smallThumbnail
+    : book;
   return (
     <div className="card">
       <div className="card__image">
-        <img src={book} alt="book" />
+        <img src={bookImg} alt="book" />
       </div>
-      <div className="card__category">Computers</div>
-      <div className="card__title">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur
-        dignissimos dolorum eveniet fuga fugiat illo, illum iste itaque
-        necessitatibus nisi omnis optio quae quod veniam. Explicabo ipsum quas
-        ratione?
+      <div className="card__category">
+        {categories ? categories[0] : <br />}
       </div>
-      <div className="card__authors">Павел Лещев</div>
+      <div className="card__title">{title ? title : <br />}</div>
+      <div className="card__authors">
+        {authors ? authors.join(", ") : <br />}
+      </div>
     </div>
   );
 };

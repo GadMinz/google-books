@@ -10,19 +10,20 @@ const Search = () => {
     setSearchValue(e.target.value);
   };
 
-  const onClickSearch = () => {
+  const onSearchSubmit = (e) => {
+    e.preventDefault();
     dispatch(fetchBooks({ searchValue }));
   };
   return (
-    <div className="search">
+    <form onSubmit={onSearchSubmit} className="search">
       <input
         type="text"
         value={searchValue}
         onChange={(e) => onChangeInput(e)}
         placeholder="Search"
       />
-      <img width={28} src={search} alt="search" onClick={onClickSearch} />
-    </div>
+      <img width={28} src={search} alt="search" onClick={onSearchSubmit} />
+    </form>
   );
 };
 
