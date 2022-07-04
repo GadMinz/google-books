@@ -1,11 +1,15 @@
 import React from "react";
 
+const sortList = ["relevance", "newest"];
+
 const Sort = () => {
+  const [open, setOpen] = React.useState(false);
+
   return (
     <div className="sort">
       <div className="sort__label">
         <b>Sorting by </b>
-        <span>
+        <span onClick={() => setOpen(!open)}>
           relevance{" "}
           <svg
             width="10"
@@ -20,6 +24,15 @@ const Sort = () => {
             />
           </svg>
         </span>
+        {open && (
+          <div className="popup">
+            <ul>
+              {sortList.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
