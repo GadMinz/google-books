@@ -5,6 +5,7 @@ const sortList = ["relevance", "newest"];
 const Sort = () => {
   const [open, setOpen] = React.useState(false);
   const sortRef = React.useRef();
+
   React.useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.path.includes(sortRef.current)) {
@@ -14,6 +15,11 @@ const Sort = () => {
     document.body.addEventListener("click", handleClickOutside);
     return () => document.body.removeEventListener("click", handleClickOutside);
   }, []);
+
+  const onClickListItem = () => {
+    setOpen(false);
+  };
+
   return (
     <div ref={sortRef} className="sort">
       <div className="sort__label">
@@ -37,7 +43,9 @@ const Sort = () => {
           <div className="popup">
             <ul>
               {sortList.map((item, i) => (
-                <li key={i}>{item}</li>
+                <li key={i} onClick={onClickListItem}>
+                  {item}
+                </li>
               ))}
             </ul>
           </div>

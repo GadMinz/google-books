@@ -12,6 +12,7 @@ const categories = [
 const Categories = () => {
   const [open, setOpen] = React.useState(false);
   const categoriesRef = React.useRef();
+
   React.useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.path.includes(categoriesRef.current)) {
@@ -21,6 +22,11 @@ const Categories = () => {
     document.body.addEventListener("click", handleClickOutside);
     return () => document.body.removeEventListener("click", handleClickOutside);
   }, []);
+
+  const onClickListItem = () => {
+    setOpen(false);
+  };
+
   return (
     <div ref={categoriesRef} className="categories">
       <div className="categories__label">
@@ -44,7 +50,9 @@ const Categories = () => {
           <div className="popup">
             <ul>
               {categories.map((item, i) => (
-                <li key={i}>{item}</li>
+                <li key={i} onClick={onClickListItem}>
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
