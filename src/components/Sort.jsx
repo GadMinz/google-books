@@ -1,9 +1,13 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSortBy } from "../redux/slices/filterSlice";
 
 const sortList = ["relevance", "newest"];
 
 const Sort = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
+  const sort = useSelector((state) => state.filter.sort);
   const sortRef = React.useRef();
 
   React.useEffect(() => {
@@ -16,7 +20,8 @@ const Sort = () => {
     return () => document.body.removeEventListener("click", handleClickOutside);
   }, []);
 
-  const onClickListItem = () => {
+  const onClickListItem = (item) => {
+    dispatch(setSortBy(item));
     setOpen(false);
   };
 
@@ -25,7 +30,7 @@ const Sort = () => {
       <div className="sort__label">
         <b>Sorting by </b>
         <span onClick={() => setOpen(!open)}>
-          relevance{" "}
+          {sort}{" "}
           <svg
             width="10"
             height="6"
@@ -43,7 +48,7 @@ const Sort = () => {
           <div className="popup">
             <ul>
               {sortList.map((item, i) => (
-                <li key={i} onClick={onClickListItem}>
+                <li key={i} onClick={() => onClickListItem(item)}>
                   {item}
                 </li>
               ))}
