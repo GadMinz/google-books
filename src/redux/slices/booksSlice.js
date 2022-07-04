@@ -4,9 +4,9 @@ const apiKey = "AIzaSyCQqLIlZ-MqNe2hLnpRsWwrpEVpx85Knk8";
 export const fetchBooks = createAsyncThunk(
   "book/fetchBookStatus",
   async (params) => {
-    const { searchValue } = params;
+    const { searchValue, orderBy } = params;
     const { data } = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchValue}&maxResults=30&key=${apiKey}`
+      `https://www.googleapis.com/books/v1/volumes?q=${searchValue}${orderBy}&maxResults=30&key=${apiKey}`
     );
     return data;
   }
