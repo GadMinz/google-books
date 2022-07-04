@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "../redux/slices/filterSlice";
 
 const categories = [
   "all",
@@ -10,7 +12,9 @@ const categories = [
   "poetry",
 ];
 const Categories = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
+  const category = useSelector((state) => state.filter.category);
   const categoriesRef = React.useRef();
 
   React.useEffect(() => {
@@ -23,7 +27,8 @@ const Categories = () => {
     return () => document.body.removeEventListener("click", handleClickOutside);
   }, []);
 
-  const onClickListItem = () => {
+  const onClickListItem = (item) => {
+    dispatch(setCategory(item));
     setOpen(false);
   };
 
@@ -32,7 +37,7 @@ const Categories = () => {
       <div className="categories__label">
         <b>Categories </b>
         <span onClick={() => setOpen(!open)}>
-          all{" "}
+          {category}{" "}
           <svg
             width="10"
             height="6"
@@ -50,7 +55,7 @@ const Categories = () => {
           <div className="popup">
             <ul>
               {categories.map((item, i) => (
-                <li key={i} onClick={onClickListItem}>
+                <li key={i} onClick={() => onClickListItem(item)}>
                   {item}
                 </li>
               ))}
