@@ -1,0 +1,18 @@
+@import "libs/normalize";
+@import "components/header";
+@import "components/search";
+@import "components/sort";
+@import "components/categories";
+
+body {
+  background-color: #d0d7de;
+}
+
+.wrapper {
+  width: calc(100vw - 100px);
+  height: 100%;
+  background-color: #fff;
+  margin: 50px auto;
+  border-radius: 10px;
+  max-width: 1400px;
+}

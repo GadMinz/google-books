@@ -1,0 +1,27 @@
+.search {
+  min-width: 350px;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+
+  input {
+    width: 90%;
+    border-radius: 5px;
+    font-size: 16px;
+    min-width: 300px;
+    font-weight: 600;
+  }
+
+  img {
+    cursor: pointer;
+  }
+
+  &__properties {
+    display: flex;
+    gap: 50px;
+    color: #ffffff;
+  }
+}
