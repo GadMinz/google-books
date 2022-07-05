@@ -2,6 +2,7 @@ import React from "react";
 import Card from "../components/Card";
 import { useSelector } from "react-redux";
 import noResults from "../assets/img/no-results.svg";
+import LoadingBlock from "../components/LoadingBlock";
 
 const Main = () => {
   const { items, totalItems, status } = useSelector((state) => state.book);
@@ -12,7 +13,7 @@ const Main = () => {
       </div>
       <div className="main__cards">
         {status === "loading" ? (
-          ""
+          [...new Array(4)].map((_, i) => <LoadingBlock key={i} />)
         ) : totalItems > 0 ? (
           items.map((obj) => <Card key={obj.id} {...obj.volumeInfo} />)
         ) : (
