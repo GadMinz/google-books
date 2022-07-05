@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Main from "./pages/Main";
 import { Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
+import Book from "./pages/Book";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/books/:id" element={<Book />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

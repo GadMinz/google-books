@@ -15,7 +15,9 @@ const Main = () => {
         {status === "loading" ? (
           [...new Array(4)].map((_, i) => <LoadingBlock key={i} />)
         ) : totalItems > 0 ? (
-          items.map((obj, i) => <Card key={obj.id + i} {...obj.volumeInfo} />)
+          items.map((obj, i) => (
+            <Card key={obj.id + i} id={obj.id} {...obj.volumeInfo} />
+          ))
         ) : (
           <div className="no-results">
             <div className="no-results--img">

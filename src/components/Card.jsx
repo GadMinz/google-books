@@ -1,12 +1,13 @@
 import React from "react";
 import book from "../assets/img/error-book.png";
+import { Link } from "react-router-dom";
 
-const Card = ({ title, categories, authors, imageLinks }) => {
+const Card = ({ title, categories, authors, imageLinks, id }) => {
   const bookImg = imageLinks
     ? imageLinks.thumbnail || imageLinks.smallThumbnail
     : book;
   return (
-    <div className="card">
+    <Link to={`/books/${id}`} className="card">
       <div className="card__image">
         <img src={bookImg} alt="book" />
       </div>
@@ -17,7 +18,7 @@ const Card = ({ title, categories, authors, imageLinks }) => {
       <div className="card__authors">
         {authors ? authors.join(", ") : <br />}
       </div>
-    </div>
+    </Link>
   );
 };
 
