@@ -13,6 +13,10 @@ const Search = () => {
   const orderBy = sort !== "all" ? `&orderBy=${sort}` : "";
   const onSearchSubmit = (e) => {
     e.preventDefault();
+    if (searchValue.length === 0 || !searchValue.trim()) {
+      alert("Empty request");
+      return;
+    }
     dispatch(fetchBooks({ searchValue, orderBy }));
   };
   return (
