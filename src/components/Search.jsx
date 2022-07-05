@@ -10,14 +10,15 @@ const Search = () => {
     setSearchValue(e.target.value);
   };
   const { category, sort } = useSelector((state) => state.filter);
-  const orderBy = sort !== "all" ? `&orderBy=${sort}` : "";
+  const orderBy = sort !== "relevance" ? `&orderBy=${sort}` : "";
+  const subject = category !== "all" ? `+subject:${category}` : "";
   const onSearchSubmit = (e) => {
     e.preventDefault();
     if (searchValue.length === 0 || !searchValue.trim()) {
       alert("Empty request");
       return;
     }
-    dispatch(fetchBooks({ searchValue, orderBy }));
+    dispatch(fetchBooks({ searchValue, orderBy, subject }));
   };
   return (
     <form onSubmit={onSearchSubmit} className="search">
