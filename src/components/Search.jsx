@@ -6,10 +6,12 @@ import { fetchBooks } from "../redux/slices/booksSlice";
 const Search = () => {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = React.useState("");
+  const { category, sort } = useSelector((state) => state.filter);
+
   const onChangeInput = (e) => {
     setSearchValue(e.target.value);
   };
-  const { category, sort } = useSelector((state) => state.filter);
+
   const orderBy = sort !== "relevance" ? `&orderBy=${sort}` : "";
   const subject = category !== "all" ? `+subject:${category}` : "";
   const onSearchSubmit = (e) => {
@@ -20,6 +22,7 @@ const Search = () => {
     }
     dispatch(fetchBooks({ searchValue, orderBy, subject }));
   };
+
   return (
     <form onSubmit={onSearchSubmit} className="search">
       <input
