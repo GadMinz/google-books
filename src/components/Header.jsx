@@ -1,7 +1,5 @@
 import React from "react";
 import Search from "./Search";
-import Categories from "./Categories";
-import Sort from "./Sort";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -13,10 +11,6 @@ const Header = () => {
         </Link>
       </div>
       <Search />
-      <div className="search__properties">
-        <Categories />
-        <Sort />
-      </div>
     </div>
   );
 };

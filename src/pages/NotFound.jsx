@@ -7,7 +7,6 @@ const NotFound = () => {
     <div className="not-found">
       <img width={256} src={notFound} alt="not-found" />
       <h2>This page isn't available</h2>
-
       <p>
         Click <Link to="/">here</Link> to go to the home page
       </p>

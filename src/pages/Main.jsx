@@ -1,11 +1,25 @@
 import React from "react";
 import Card from "../components/Card";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import noResults from "../assets/img/no-results.svg";
 import LoadingBlock from "../components/LoadingBlock";
+import { fetchBooks } from "../redux/slices/booksSlice";
 
 const Main = () => {
+  const dispatch = useDispatch();
   const { items, totalItems, status } = useSelector((state) => state.book);
+  const { category, sort, searchValue } = useSelector((state) => state.filter);
+  const getBooks = () => {
+    if (searchValue.length === 0 || !searchValue.trim()) {
+      return;
+    }
+    const orderBy = sort !== "relevance" ? `&orderBy=${sort}` : "";
+    const subject = category !== "all" ? `+subject:${category}` : "";
+    dispatch(fetchBooks({ searchValue, orderBy, subject }));
+  };
+  React.useEffect(() => {
+    getBooks();
+  }, [category, sort, searchValue]);
   return (
     <div className="main">
       <div className="main__results">

@@ -1,6 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setCategory } from "../redux/slices/filterSlice";
 
 const categories = [
   "all",
@@ -11,10 +9,8 @@ const categories = [
   "medical",
   "poetry",
 ];
-const Categories = () => {
-  const dispatch = useDispatch();
+const Categories = ({ category, setCategory }) => {
   const [open, setOpen] = React.useState(false);
-  const category = useSelector((state) => state.filter.category);
   const categoriesRef = React.useRef();
 
   React.useEffect(() => {
@@ -28,7 +24,7 @@ const Categories = () => {
   }, []);
 
   const onClickListItem = (item) => {
-    dispatch(setCategory(item));
+    setCategory(item);
     setOpen(false);
   };
 

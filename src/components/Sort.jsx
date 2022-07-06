@@ -1,13 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setSortBy } from "../redux/slices/filterSlice";
 
 const sortList = ["relevance", "newest"];
 
-const Sort = () => {
-  const dispatch = useDispatch();
+const Sort = ({ sort, setSort }) => {
   const [open, setOpen] = React.useState(false);
-  const sort = useSelector((state) => state.filter.sort);
   const sortRef = React.useRef();
 
   React.useEffect(() => {
@@ -21,7 +17,7 @@ const Sort = () => {
   }, []);
 
   const onClickListItem = (item) => {
-    dispatch(setSortBy(item));
+    setSort(item);
     setOpen(false);
   };
 
