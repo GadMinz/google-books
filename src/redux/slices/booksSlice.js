@@ -32,7 +32,8 @@ const bookSlice = createSlice({
       state.status = "loading";
     },
     [fetchBooks.fulfilled]: (state, action) => {
-      state.items.push(...action.payload.items);
+      const items = Array.isArray(action.payload.items) ? action.payload.items : []
+      state.items.push(...items);
       state.totalItems = action.payload.totalItems;
       state.status = "success";
     },
