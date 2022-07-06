@@ -4,6 +4,7 @@ import Main from "./pages/Main";
 import { Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Book from "./pages/Book";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <Header />
       <div className="content">
         <Routes>
-          <Route path="/" element={<Main />} />
+            <Route path="/" element={<Home />} />
+          <Route path="/search" element={<Main />} />
           <Route path="/books/:id" element={<Book />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

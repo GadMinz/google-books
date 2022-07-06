@@ -21,7 +21,12 @@ const initialState = {
 const bookSlice = createSlice({
   name: "book",
   initialState,
-  reducers: {},
+  reducers: {
+    removeItems(state) {
+      state.items = [];
+      state.totalItems = 0;
+    },
+  },
   extraReducers: {
     [fetchBooks.pending]: (state) => {
       state.status = "loading";
@@ -41,4 +46,5 @@ const bookSlice = createSlice({
   },
 });
 
+export const { removeItems } = bookSlice.actions;
 export default bookSlice.reducer;

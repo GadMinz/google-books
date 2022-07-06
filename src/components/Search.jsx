@@ -10,7 +10,6 @@ import Sort from "./Sort";
 const Search = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const { category, sort, searchValue } = useSelector((state) => state.filter);
   const [value, setValue] = React.useState("");
   const [category, setCategory] = React.useState("all");
   const [sort, setSort] = React.useState("relevance");
@@ -35,7 +34,7 @@ const Search = () => {
     }
     dispatch(setFilters({ ...query }))
     const queryString = qs.stringify(query);
-    navigate(`/?${queryString}`);
+    navigate({ pathname: "/search", search: `?${queryString}` });
   };
 
   return (

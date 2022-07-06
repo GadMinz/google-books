@@ -3,7 +3,7 @@ import Card from "../components/Card";
 import { useDispatch, useSelector } from "react-redux";
 import noResults from "../assets/img/no-results.svg";
 import LoadingBlock from "../components/LoadingBlock";
-import { fetchBooks } from "../redux/slices/booksSlice";
+import { fetchBooks} from "../redux/slices/booksSlice";
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ const Main = () => {
   React.useEffect(() => {
     getBooks();
   }, [category, sort, searchValue]);
+
   return (
     <div className="main">
       <div className="main__results">
