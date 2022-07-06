@@ -1,6 +1,7 @@
 .book {
   display: flex;
   &__image {
+    padding: 20px 0;
     text-align: center;
     flex: 1;
     align-self: center;
