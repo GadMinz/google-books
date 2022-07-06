@@ -1,11 +1,12 @@
 import React from "react";
 import search from "../assets/img/search.svg";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import qs from "qs";
 import { setFilters } from "../redux/slices/filterSlice";
 import Categories from "./Categories";
 import Sort from "./Sort";
+import { removeItems } from "../redux/slices/booksSlice";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -17,6 +18,9 @@ const Search = () => {
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
+      setCategory(params.category);
+      setSort(params.sort);
+      setValue(params.search);
       dispatch(setFilters({ ...params }));
     }
   }, []);
@@ -24,15 +28,18 @@ const Search = () => {
   const onChangeInput = (e) => {
     setValue(e.target.value);
   };
-
   const onSearchSubmit = (e) => {
     e.preventDefault();
+    if (value.length === 0 || !value.trim()) {
+      return;
+    }
     const query = {
       search: value,
       category,
-      sort
-    }
-    dispatch(setFilters({ ...query }))
+      sort,
+    };
+    dispatch(removeItems());
+    dispatch(setFilters({ ...query }));
     const queryString = qs.stringify(query);
     navigate({ pathname: "/search", search: `?${queryString}` });
   };

@@ -61,6 +61,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 30px 0;
 
   &--title {
     font-weight: 800;
@@ -112,4 +113,30 @@ body {
       }
     }
   }
+}
+
+.button {
+  background: #313131;
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+
+  &:hover {
+    background: lighten(#313131, 6.25%);
+  }
+
+  &:active {
+    background: lighten(#313131, 12.25%);
+  }
+
+}
+
+.spinner {
+  display: block;
+  margin: 0 auto;
 }

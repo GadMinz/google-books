@@ -30,18 +30,14 @@ const bookSlice = createSlice({
   extraReducers: {
     [fetchBooks.pending]: (state) => {
       state.status = "loading";
-      state.items = [];
-      state.totalItems = 0;
     },
     [fetchBooks.fulfilled]: (state, action) => {
-      state.items = action.payload.items;
+      state.items.push(...action.payload.items);
       state.totalItems = action.payload.totalItems;
       state.status = "success";
     },
     [fetchBooks.rejected]: (state) => {
       state.status = "error";
-      state.items = [];
-      state.totalItems = 0;
     },
   },
 });
