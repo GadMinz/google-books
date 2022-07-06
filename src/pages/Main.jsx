@@ -10,6 +10,7 @@ const Main = () => {
   const dispatch = useDispatch();
   const { items, totalItems, status } = useSelector((state) => state.book);
   const { category, sort, searchValue } = useSelector((state) => state.filter);
+
   const getBooks = () => {
     if (searchValue.length === 0 || !searchValue.trim()) {
       return;
@@ -19,7 +20,7 @@ const Main = () => {
     dispatch(fetchBooks({ searchValue, orderBy, subject }));
   };
   React.useEffect(() => {
-    getBooks();
+      getBooks();
   }, [category, sort, searchValue]);
 
   const onClickLoad = () => {
