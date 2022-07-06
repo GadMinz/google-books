@@ -9,7 +9,9 @@ import spinner from "../assets/img/spinner.svg";
 const Main = () => {
   const dispatch = useDispatch();
   const { items, totalItems, status } = useSelector((state) => state.book);
-  const { category, sort, searchValue } = useSelector((state) => state.filter);
+  const { category, sort, searchValue, startIndex } = useSelector(
+    (state) => state.filter
+  );
 
   const getBooks = () => {
     if (searchValue.length === 0 || !searchValue.trim()) {
@@ -17,10 +19,10 @@ const Main = () => {
     }
     const orderBy = sort !== "relevance" ? `&orderBy=${sort}` : "";
     const subject = category !== "all" ? `+subject:${category}` : "";
-    dispatch(fetchBooks({ searchValue, orderBy, subject }));
+    dispatch(fetchBooks({ searchValue, orderBy, subject, startIndex }));
   };
   React.useEffect(() => {
-      getBooks();
+    getBooks();
   }, [category, sort, searchValue]);
 
   const onClickLoad = () => {
@@ -47,7 +49,8 @@ const Main = () => {
           </div>
         )}
       </div>
-      {items.length > 0 &&
+      {totalItems - 30 >= startIndex &&
+        items.length > 0 &&
         (status === "loading" ? (
           <img className="spinner" src={spinner} alt="loading" />
         ) : (

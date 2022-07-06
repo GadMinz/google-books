@@ -1,13 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { setStartIndex } from "./filterSlice";
 const apiKey = "AIzaSyCQqLIlZ-MqNe2hLnpRsWwrpEVpx85Knk8";
+
 export const fetchBooks = createAsyncThunk(
   "book/fetchBookStatus",
-  async (params) => {
-    const { searchValue, orderBy, subject } = params;
+  async (params, { dispatch }) => {
+    const { searchValue, orderBy, subject, startIndex } = params;
     const { data } = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchValue}${subject}${orderBy}&maxResults=30&key=${apiKey}`
+      `https://www.googleapis.com/books/v1/volumes?q=${searchValue}${subject}${orderBy}&startIndex=${startIndex}&maxResults=30&key=${apiKey}`
     );
+    if (data.totalItems > 0 && data.items === undefined) {
+      dispatch(setStartIndex(data.totalItems));
+      return data;
+    }
+    dispatch(setStartIndex(startIndex + 30));
     return data;
   }
 );
@@ -32,7 +39,9 @@ const bookSlice = createSlice({
       state.status = "loading";
     },
     [fetchBooks.fulfilled]: (state, action) => {
-      const items = Array.isArray(action.payload.items) ? action.payload.items : []
+      const items = Array.isArray(action.payload.items)
+        ? action.payload.items
+        : [];
       state.items.push(...items);
       state.totalItems = action.payload.totalItems;
       state.status = "success";

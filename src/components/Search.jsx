@@ -3,7 +3,7 @@ import search from "../assets/img/search.svg";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import qs from "qs";
-import { setFilters } from "../redux/slices/filterSlice";
+import { setFilters, setStartIndex } from "../redux/slices/filterSlice";
 import Categories from "./Categories";
 import Sort from "./Sort";
 import { removeItems } from "../redux/slices/booksSlice";
@@ -38,6 +38,7 @@ const Search = () => {
       category,
       sort,
     };
+    dispatch(setStartIndex(0));
     dispatch(removeItems());
     dispatch(setFilters({ ...query }));
     const queryString = qs.stringify(query);
