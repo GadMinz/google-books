@@ -6,7 +6,9 @@ const apiKey = "AIzaSyCQqLIlZ-MqNe2hLnpRsWwrpEVpx85Knk8";
 export const fetchBooks = createAsyncThunk(
   "book/fetchBookStatus",
   async (params, { dispatch }) => {
-    const { searchValue, orderBy, subject, startIndex } = params;
+    const { searchValue, sort, category, startIndex } = params;
+    const orderBy = sort !== "relevance" ? `&orderBy=${sort}` : "";
+    const subject = category !== "all" ? `+subject:${category}` : "";
     const { data } = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${searchValue}${subject}${orderBy}&startIndex=${startIndex}&maxResults=30&key=${apiKey}`
     );
@@ -39,11 +41,14 @@ const bookSlice = createSlice({
       state.status = "loading";
     },
     [fetchBooks.fulfilled]: (state, action) => {
-      const items = Array.isArray(action.payload.items)
-        ? action.payload.items
-        : [];
-      state.items.push(...items);
-      state.totalItems = action.payload.totalItems;
+      if (action.payload) {
+        const items = Array.isArray(action.payload.items)
+          ? action.payload.items
+          : [];
+        state.items.push(...items);
+        state.totalItems =
+          state.totalItems === 0 ? action.payload.totalItems : state.totalItems;
+      }
       state.status = "success";
     },
     [fetchBooks.rejected]: (state) => {

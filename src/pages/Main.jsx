@@ -13,21 +13,12 @@ const Main = () => {
     (state) => state.filter
   );
 
-  const getBooks = () => {
-    if (searchValue.length === 0 || !searchValue.trim()) {
-      return;
-    }
-    const orderBy = sort !== "relevance" ? `&orderBy=${sort}` : "";
-    const subject = category !== "all" ? `+subject:${category}` : "";
-    dispatch(fetchBooks({ searchValue, orderBy, subject, startIndex }));
-  };
-  React.useEffect(() => {
-    getBooks();
-  }, [category, sort, searchValue]);
-
   const onClickLoad = () => {
-    getBooks();
+    dispatch(fetchBooks({ searchValue, sort, category, startIndex }));
   };
+  if (status === "error") {
+    alert("Failed to load books");
+  }
   return (
     <div className="main">
       <div className="main__results">
@@ -49,7 +40,7 @@ const Main = () => {
           </div>
         )}
       </div>
-      {totalItems - 30 >= startIndex &&
+      {totalItems > startIndex &&
         items.length > 0 &&
         (status === "loading" ? (
           <img className="spinner" src={spinner} alt="loading" />
